@@ -21,11 +21,19 @@ class Vector:
         self.y = y
         self.z = z
 
+    def __add__(self, other):
+        return Vector(self.x+other.x, self.y+other.y, self.z+other.z)
+
     def __sub__(self, other):
         return Vector(self.x-other.x, self.y-other.y, self.z-other.z)
 
     def __mul__(self, other):
-        return self.x*other.x + self.y*other.y + self.z*other.z
+        if type(other) == Vector:
+            return self.x*other.x + self.y*other.y + self.z*other.z
+        return Vector(self.x*other, self.y*other, self.z*other)
+
+    def __div__(self, other):
+        return Vector(self.x/other, self.y/other, self.z/other)
 
     def __neg__(self):
         return Vector(-self.x, -self.y, -self.z)
@@ -55,7 +63,7 @@ def get_circumcircle(a, b, c):
     a_sq = a * a
     b_sq = b * b
     c_sq = c * c
-    d = 2.0 * (a.x*(b.y-[c.y) + b.x*(c.y-a.y) + c.x*(a.y-b.y))
+    d = 2.0 * (a.x*(b.y-c.y) + b.x*(c.y-a.y) + c.x*(a.y-b.y))
 
     x_center = (a_sq*(b.y-c.y) + b_sq*(c.y-a.y) + c_sq*(a.y-b.y)) / d
     y_center = (a_sq*(c.x-b.x) + b_sq*(a.x-c.x) + c_sq*(b.x-a.x)) / d
